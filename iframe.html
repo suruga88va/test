@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+    参考サイト
+    https://web-designer.cman.jp/html_ref/abc_list/frame/
+    https://www.conifer.jp/html5-frameset.html
+-->
+<html lang="ja">
+	<head>
+        <!--
+        <meta http-equiv="Content-Style-Type" content="text/css; charset=utf-8">
+        -->
+        <meta charset="utf-8">
+        <style>
+            /* このiframeでサイズを明示しないと、中身が小さくなってしまう */
+            iframe {
+	border: none;
+	height: 100%;
+	width: 100%;
+	}
+        html {
+         height: 100%;
+         margin: 0;
+        }
+        body {
+         margin: 0;
+         padding-bottom: 120px;
+         padding-top: 100px;
+        }
+        body, .boxCal{
+         box-sizing: border-box;
+         -moz-box-sizing: border-box;
+         height: 100%;
+         overflow: auto;
+        }
+        #frTop {
+         background-color: lime;
+         /*height: 140px;*/
+         /*height: 40px;*/
+         height: 10%;
+         width: 100%;
+         margin-top: -100px;
+         padding: 5px;
+        }
+        #frBottom {
+         background-color: yellow;
+         bottom: 0;
+         height: 120px;
+         position: absolute;
+         width: 100%;
+         padding: 5px;
+        }
+        #frMiddle {
+            height: 90%;
+         }
+        #frLeft {
+         background-color:aqua;
+         float: left;
+         width: 240px;
+         position: absolute;
+         /*height: 100%;*/
+         padding: 5px;
+        }
+        #frRight {
+         background-color:orange;
+         /* absolute, left, rightが無いと、リンクが正しい位置に来ない */
+         position: absolute;
+         left: 240px;
+         right: 0px;
+         padding: 5px;
+        }
+        </style>
+        <title>フレームの縦横4分割例</title>
+        </head>
+        <body>
+        <div id="frTop" class="boxCal">
+            <a href="index.html" >我が社のトップページ</a>
+            <!--
+            <iframe src="index_head.html">TOPフレーム</iframe>
+            -->
+        </div>
+        <!--
+            ちょっとBottomがMiddle層のabsoluteと相性が悪いので一端除外
+        <div id="frBottom" class="boxCal">BOTTOMフレーム</div>
+        -->
+        <div id="frMiddle " class="boxCal">
+        <!--
+        <div id="frMiddle " class="boxCal" scrolling="no" frameborder="no">
+        -->
+            <div id="frLeft" class="boxCal">
+                <!--
+                <iframe src="index_menu.html" scrolling="no">左フレーム</iframe>
+                -->
+                <iframe src="index_menu.html">左フレーム</iframe>
+            </div>
+            <div id="frRight" class="boxCal">
+                <!-- このname指定が無いとリンク切り替えの指定ができない-->
+                <iframe src="news_paper.html" name="right">右フレーム</iframe>
+            </div>
+        </div>
+        </body>
+</html>

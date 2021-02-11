@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!--
+<FONT face="MS UI Gothic"></FONT>
+<html lang="ja">
+-->
+<html>
+	<head>
+		<!--<meta http-equiv="content-type" content="text/html; charset=utf-8">-->
+		<meta charset="UTF-8">
+		<title>canvasで図形を描く</title>
+
+		<!--外部にスクリプトを置く方法-->
+		<script type="text/javascript" src="benkyo_cvs.js"></script>
+	</head>
+	<body>
+		<!--<body onLoad="DRW()">-->
+		<h2>canvasで図形を描く</h2>
+		<canvas id="CVS" width="200" height="200" style="background-color:yellow;">
+			図形を表示するには、canvasタグをサポートしたブラウザが必要です。
+		</canvas>
+		<input type="button" id="BTN_a" onclick="DRW()" value="描画">
+		<input type="button" id="BTN_b" onclick="RST()" value="消去">
+	</body>
+</html>

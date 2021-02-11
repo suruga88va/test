@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01
+Frameset//EN"
+	"http://www.w3.org/TR/html4/frameset.dtd">
+<html lang="ja">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>フレームのサンプル</title>
+	</head>
+	<frameset rows="15%,85%">
+		<frame src="index_head.html">
+		<frameset cols="200,*">
+			<frame src="index_menu.html" name="left">
+			<frame src="home.html" name="right">
+			<!--
+			<frame src="global.html" name="right">
+			-->
+		</frameset>
+	</frameset>
+	<!--
+		<body>分割フレームを使うときは"body"が使えない</body>
+	-->
+</html>
