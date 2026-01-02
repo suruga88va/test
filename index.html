@@ -8,7 +8,8 @@
 		<style>
 			:root{
 				--gap:8px;
-				--card-border:#ddd;
+				--card-border:#999; /* 境界を濃くして視認性を改善 */
+				--card-border-width:2px;
 				--card-padding:10px;
 			}
 			body{
@@ -20,21 +21,39 @@
 			.meta{margin:8px 0}
 			.link-grid{
 				display:grid;
-				grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+				/* 最小列幅を少し下げて、極端に広がらないようにする */
+				grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
 				gap:var(--gap);
 				list-style:none;
 				padding:0;
 				margin:0;
 			}
 			.link-card{
-				border:1px solid var(--card-border);
+				border:var(--card-border-width) solid var(--card-border);
 				padding:var(--card-padding);
 				display:flex;
 				align-items:center;
 				gap:8px;
 				background:#fff;
+				border-radius:8px;
+				box-shadow:0 1px 2px rgba(0,0,0,0.06);
+				transition:transform .15s ease, box-shadow .15s ease;
 			}
-			.link-card img{width:120px;max-width:40%;height:auto;display:block}
+			.link-card:hover,
+			.link-card:focus{
+				box-shadow:0 6px 18px rgba(0,0,0,0.12);
+				transform:translateY(-3px);
+			}
+			/* アイコンの最大サイズを固定して、ウィンドウ伸縮で極端に大きくならないようにする */
+			.link-card img{
+				width:auto;
+				height:auto;
+				max-width:64px; /* 横幅の上限 */
+				max-height:48px; /* 高さの上限 */
+				display:block;
+			}
+			/* アイコンがあるリンクはテキストを視覚的に隠す（alt は残す） */
+			.link-card img + span{display:none}
 			.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 			footer{margin-top:16px;font-size:0.9rem;color:#444}
 			a{color:inherit;text-decoration:none}
@@ -47,15 +66,16 @@
 		</header>
 
 		<main>
-			<p class="meta">最終更新日: <time datetime="2026-01-02">2024/06/17</time></p>
+			<p class="meta">最終更新日: <time datetime="2026-01-02">2026年1月2日</time></p>
 
 			<p class="meta">現在の時間は <span id="current-time" aria-live="polite"></span></p>
 
 			<!-- 検索フォーム等はコメントアウトされたまま。必要なら復活させてください -->
-
-			<section aria-labelledby="links-heading">
-				<h2 id="links-heading" class="visually-hidden">リンク一覧</h2>
-				<ul class="link-grid">
+			
+			<section aria-labelledby="general-heading">
+				<h2 id="general-heading">一般</h2>
+				<ul class="link-grid" aria-describedby="general-desc">
+					<p id="general-desc" class="visually-hidden">一般カテゴリのよく使うリンク一覧</p>
 					<li>
 						<a class="link-card" href="https://duckduckgo.com/" target="_blank" rel="noopener noreferrer">DuckDuckGo</a>
 					</li>
@@ -74,17 +94,15 @@
 					<li>
 						<a class="link-card" href="https://www.bing.com/" target="_blank" rel="noopener noreferrer">Bing</a>
 					</li>
-
 					<li><a class="link-card" href="http://www.infoseek.co.jp/" target="_blank" rel="noopener noreferrer">楽天Infoseek</a></li>
-					<li><a class="link-card" href="#" aria-disabled="true">reserve</a></li>
-					<li>
-						<a class="link-card" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Facebook">
-							<img src="./pictures/facebook.jpg" alt="Facebook">
-							<span>Facebook</span>
-						</a>
-					</li>
-					<li><a class="link-card" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+					<li><a class="link-card" href="http://www.so-net.ne.jp/" target="_blank" rel="noopener noreferrer">So-net</a></li>
+				</ul>
+			</section>
 
+			<section aria-labelledby="store-heading">
+				<h2 id="store-heading">ストア</h2>
+				<ul class="link-grid" aria-describedby="store-desc">
+					<p id="store-desc" class="visually-hidden">ストアカテゴリのリンク一覧</p>
 					<li>
 						<a class="link-card" href="https://www.amazon.co.jp/" target="_blank" rel="noopener noreferrer" title="Amazon.co.jp">
 							<img src="./pictures/amazon.jpg" alt="Amazon.co.jp">
@@ -94,9 +112,16 @@
 					<li><a class="link-card" href="https://www.yodobashi.com/" target="_blank" rel="noopener noreferrer">ヨドバシ.com</a></li>
 					<li><a class="link-card" href="https://www.yamada-denkiweb.com/" target="_blank" rel="noopener noreferrer">ヤマダウェブコム</a></li>
 					<li><a class="link-card" href="https://ja.aliexpress.com/" target="_blank" rel="noopener noreferrer">AliExpress</a></li>
+					<li><a class="link-card" href="https://www.sony.jp/" target="_blank" rel="noopener noreferrer">Sony Store</a></li>
+				</ul>
+			</section>
 
+			<section aria-labelledby="app-game-heading">
+				<h2 id="app-game-heading">アプリ・ゲームストア</h2>
+				<ul class="link-grid" aria-describedby="app-game-desc">
+					<p id="app-game-desc" class="visually-hidden">アプリ・ゲームストアカテゴリのリンク一覧</p>
 					<li><a class="link-card" href="https://store.playstation.com/" target="_blank" rel="noopener noreferrer">PlayStation.Store</a></li>
-					<li><a class="link-card" href="http://store.origin.com/" target="_blank" rel="noopener noreferrer">Origin</a></li>
+					<li><a class="link-card" href="https://www.ea.com/ja-jp/ea-app" target="_blank" rel="noopener noreferrer" title="EA app">EA app (旧Origin)</a></li>
 					<li><a class="link-card" href="http://store.steampowered.com/?l=japanese" target="_blank" rel="noopener noreferrer">Steam</a></li>
 					<li><a class="link-card" href="https://marketplace.xbox.com/ja-JP/" target="_blank" rel="noopener noreferrer">XBOXゲームストア</a></li>
 
@@ -104,15 +129,32 @@
 					<li><a class="link-card" href="https://www.apple.com/jp/ios/app-store/" target="_blank" rel="noopener noreferrer">App Store</a></li>
 					<li><a class="link-card" href="https://play.google.com/store" target="_blank" rel="noopener noreferrer">Google Play</a></li>
 					<li><a class="link-card" href="https://store.nintendo.co.jp/" target="_blank" rel="noopener noreferrer">My Nintendo Store</a></li>
-
+					<li><a class="link-card" href="https://luna.amazon.com/claims/home" target="_blank" rel="noopener noreferrer">luna Amazon</a></li>
 					<li><a class="link-card" href="http://ebookstore.sony.jp/" target="_blank" rel="noopener noreferrer">Reader Store</a></li>
-					<li><a class="link-card" href="http://www.so-net.ne.jp/" target="_blank" rel="noopener noreferrer">So-net</a></li>
-					<li><a class="link-card" href="https://www.sony.jp/" target="_blank" rel="noopener noreferrer">Sony Store</a></li>
-					<li><a class="link-card" href="#" aria-disabled="true">reserve</a></li>
+				</ul>
+			</section>
 
-					<li><a class="link-card" href="http://ikedanobuo.livedoor.biz/" target="_blank" rel="noopener noreferrer">池田信夫 blog</a></li>
+			<section aria-labelledby="sns-blog-heading">
+				<h2 id="sns-blog-heading">SNS、ブログ</h2>
+				<ul class="link-grid" aria-describedby="sns-blog-desc">
+					<p id="sns-blog-desc" class="visually-hidden">SNS、ブログカテゴリのリンク一覧</p>
 					<li><a class="link-card" href="https://www.notion.so/" target="_blank" rel="noopener noreferrer">Notion</a></li>
-					<li class="link-card">予備</li>
+					<li>
+						<a class="link-card" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Facebook">
+							<img src="./pictures/facebook.jpg" alt="Facebook">
+							<span>Facebook</span>
+						</a>
+					</li>
+					<li><a class="link-card" href="https://x.com/" target="_blank" rel="noopener noreferrer" title="X">X(旧Twitter)</a></li>
+					<li><a class="link-card" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" title="Instagram">Instagram</a></li>
+				</ul>
+			</section>
+
+			<section aria-labelledby="other-heading">
+				<h2 id="other-heading">その他</h2>
+				<ul class="link-grid" aria-describedby="other-desc">
+					<p id="other-desc" class="visually-hidden">その他カテゴリのリンク一覧</p>
+					<li><a class="link-card" href="http://ikedanobuo.livedoor.biz/" target="_blank" rel="noopener noreferrer">池田信夫 blog</a></li>
 					<li><a class="link-card" href="iframe.html" target="_blank" rel="noopener noreferrer">新フレームサンプル</a></li>
 				</ul>
 			</section>
