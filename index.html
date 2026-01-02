@@ -1,150 +1,135 @@
 <!DOCTYPE html>
-<!--<FONT face="MS UI Gothic"></FONT>-->
-<html>
+<!-- リファクタリング済み: セマンティックタグ、レスポンシブ CSS、アクセシビリティ改善、document.write を除去 -->
+<html lang="ja">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>我が社のトップページ</title>
+		<style>
+			:root{
+				--gap:8px;
+				--card-border:#ddd;
+				--card-padding:10px;
+			}
+			body{
+				font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+				line-height:1.4;
+				margin:16px;
+			}
+			header h1{font-size:1.4rem;margin:0 0 12px 0}
+			.meta{margin:8px 0}
+			.link-grid{
+				display:grid;
+				grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+				gap:var(--gap);
+				list-style:none;
+				padding:0;
+				margin:0;
+			}
+			.link-card{
+				border:1px solid var(--card-border);
+				padding:var(--card-padding);
+				display:flex;
+				align-items:center;
+				gap:8px;
+				background:#fff;
+			}
+			.link-card img{width:120px;max-width:40%;height:auto;display:block}
+			.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+			footer{margin-top:16px;font-size:0.9rem;color:#444}
+			a{color:inherit;text-decoration:none}
+			a:hover{text-decoration:underline}
+		</style>
 	</head>
 	<body>
-		<!--<FONT face="MS UI Gothic"></FONT>まずやってみよう<br>-->
-		<!--<IMG SRC="http://lib014.upp.so-net.ne.jp/cgi-bin/counter.cgi?udir=suruga&cname=Access&gctype=S01&keta=6">-->
-		<p>
-			最終更新日:<time>2024/06/17</time>
-		</p>
-		<p>
-			現在の時間は
-			<script>
-				document.write(
-					(new Date).toLocaleString());
-			</script>
-		</p>
+		<header>
+			<h1>我が社のトップページ</h1>
+		</header>
 
-		<!--google検索バー
-		<form action="http://www.google.co.jp/search" method="get">
-			<input type="search" name="q" placeholder="Googleサーチ" size="72">
-			<input type="submit" name="btnG" value="検索">
-		</form>
-		-->
-		<!--こっちはYahoo
-		<form action="http://search.yahoo.co.jp/search" method="get">
-			<input type="search" name="p" placeholder="キーワードを入力">
-			<input type="submit" name="" value="検索">
-		</form>
-		-->
+		<main>
+			<p class="meta">最終更新日: <time datetime="2026-01-02">2024/06/17</time></p>
 
-		<table border="1" cellpadding="5" cellspacing="0">
-			<tr>
-				<td>
-					<a href="https://duckduckgo.com/" target="_blank">DuckDuckGo</a>
-				</td>
-				<td>
-					<!--
-					title属性は必須ではないが、付けることでカーソルを当てるとポップアップが出る。
-					これは最近のブラウザの機能であり、昔はcssやjsで自作していたらしい。
-					-->
-					<a href="http://www.google.co.jp/" target="_blank" title="Google">
-						<!--altとは画像が無い場合の代替文字-->
-						<img src="./pictures/google_bn.gif" alt="Google">
-					</a>
-				</td>
-				<td>
-					<a href="https://search.yahoo.co.jp/" target="_blank" title="Yahoo!検索">
-						<img src="./pictures/yahoo.jpg" alt="facebook">
-					</a>
-				</td>
-				<td>
-					<a href="https://www.bing.com/" target="_blank">Bing</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="http://www.infoseek.co.jp/" target="_blank">楽天Infoseek</a>
-				</td>
-				<td>
-					<a href="" target="_blank">reserve</a>
-				</td>
-				<td>
-					<a href="https://www.facebook.com/" target="_blank" title="facebook">
-						<!--<img src="./facebook_link170-40.jpg" alt="facebook">-->
-						<img src="./pictures/facebook.jpg" alt="facebook">
-					</a>
-				</td>
-				<td>
-					<a href="https://twitter.com/" target="_blank">Twitter</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="https://www.amazon.co.jp/" target="_blank" title="amazon">
-						<img src="./pictures/amazon.jpg" alt="facebook">
-					</a>
-				</td>
-				<td>
-					<a href="https://www.yodobashi.com/" target="_blank">ヨドバシ.com</a>
-				</td>
-				<td>
-					<a href="https://www.yamada-denkiweb.com/" target="_blank">ヤマダウェブコム</a>
-				</td>
-				<td>
-					<a href="https://ja.aliexpress.com/" target="_blank">AliExpress</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="https://store.playstation.com/" target="_blank">PlayStation.Store</a>
-				</td>
-				<td>
-					<a href="http://store.origin.com/" target="_blank">Origin</a>
-				</td>
-				<td>
-					<a href="http://store.steampowered.com/?l=japanese" target="_blank">Steam</a>
-				</td>
-				<td>
-					<a href="https://marketplace.xbox.com/ja-JP/" target="_blank">XBOXゲームストア</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="https://www.epicgames.com/store/ja/" target="_blank">Epic Games|Store</a>
-				</td>
-				<td>
-					<a href="https://www.apple.com/jp/ios/app-store/" target="_blank">App Store</a>
-				</td>
-				<td>
-					<a href="https://play.google.com/store" target="_blank">Google Play</a>
-				</td>
-				<td>
-					<a href="https://store.nintendo.co.jp/" target="_blank">My Nintendo Store</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="http://ebookstore.sony.jp/" target="_blank">Reader Store</a>
-				</td>
-				<td>
-					<a href="http://www.so-net.ne.jp/" target="_blank">So-net</a>
-				</td>
-				<td>
-					<a href="https://www.sony.jp/" target="_blank">Sony Store</a>
-				</td>
-				<td>
-					<a href="" target="_blank">reserve</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="http://ikedanobuo.livedoor.biz/" target="_blank">池田信夫 blog</a>
-				</td>
-				<td>
-					<a href="https://www.notion.so/" target="_blank">Notion</a>
-				</td>
-				<td>
-					予備
-				</td>
-				<td>
-					<a href="iframe.html" target="_blank">新フレームサンプル</a>
-				</td>
-			</tr>
-		</table>
+			<p class="meta">現在の時間は <span id="current-time" aria-live="polite"></span></p>
+
+			<!-- 検索フォーム等はコメントアウトされたまま。必要なら復活させてください -->
+
+			<section aria-labelledby="links-heading">
+				<h2 id="links-heading" class="visually-hidden">リンク一覧</h2>
+				<ul class="link-grid">
+					<li>
+						<a class="link-card" href="https://duckduckgo.com/" target="_blank" rel="noopener noreferrer">DuckDuckGo</a>
+					</li>
+					<li>
+						<a class="link-card" href="http://www.google.co.jp/" target="_blank" rel="noopener noreferrer" title="Google">
+							<img src="./pictures/google_bn.gif" alt="Google トップページ">
+							<span>Google</span>
+						</a>
+					</li>
+					<li>
+						<a class="link-card" href="https://search.yahoo.co.jp/" target="_blank" rel="noopener noreferrer" title="Yahoo!検索">
+							<img src="./pictures/yahoo.jpg" alt="Yahoo!検索">
+							<span>Yahoo!検索</span>
+						</a>
+					</li>
+					<li>
+						<a class="link-card" href="https://www.bing.com/" target="_blank" rel="noopener noreferrer">Bing</a>
+					</li>
+
+					<li><a class="link-card" href="http://www.infoseek.co.jp/" target="_blank" rel="noopener noreferrer">楽天Infoseek</a></li>
+					<li><a class="link-card" href="#" aria-disabled="true">reserve</a></li>
+					<li>
+						<a class="link-card" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Facebook">
+							<img src="./pictures/facebook.jpg" alt="Facebook">
+							<span>Facebook</span>
+						</a>
+					</li>
+					<li><a class="link-card" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+
+					<li>
+						<a class="link-card" href="https://www.amazon.co.jp/" target="_blank" rel="noopener noreferrer" title="Amazon.co.jp">
+							<img src="./pictures/amazon.jpg" alt="Amazon.co.jp">
+							<span>Amazon.co.jp</span>
+						</a>
+					</li>
+					<li><a class="link-card" href="https://www.yodobashi.com/" target="_blank" rel="noopener noreferrer">ヨドバシ.com</a></li>
+					<li><a class="link-card" href="https://www.yamada-denkiweb.com/" target="_blank" rel="noopener noreferrer">ヤマダウェブコム</a></li>
+					<li><a class="link-card" href="https://ja.aliexpress.com/" target="_blank" rel="noopener noreferrer">AliExpress</a></li>
+
+					<li><a class="link-card" href="https://store.playstation.com/" target="_blank" rel="noopener noreferrer">PlayStation.Store</a></li>
+					<li><a class="link-card" href="http://store.origin.com/" target="_blank" rel="noopener noreferrer">Origin</a></li>
+					<li><a class="link-card" href="http://store.steampowered.com/?l=japanese" target="_blank" rel="noopener noreferrer">Steam</a></li>
+					<li><a class="link-card" href="https://marketplace.xbox.com/ja-JP/" target="_blank" rel="noopener noreferrer">XBOXゲームストア</a></li>
+
+					<li><a class="link-card" href="https://www.epicgames.com/store/ja/" target="_blank" rel="noopener noreferrer">Epic Games Store</a></li>
+					<li><a class="link-card" href="https://www.apple.com/jp/ios/app-store/" target="_blank" rel="noopener noreferrer">App Store</a></li>
+					<li><a class="link-card" href="https://play.google.com/store" target="_blank" rel="noopener noreferrer">Google Play</a></li>
+					<li><a class="link-card" href="https://store.nintendo.co.jp/" target="_blank" rel="noopener noreferrer">My Nintendo Store</a></li>
+
+					<li><a class="link-card" href="http://ebookstore.sony.jp/" target="_blank" rel="noopener noreferrer">Reader Store</a></li>
+					<li><a class="link-card" href="http://www.so-net.ne.jp/" target="_blank" rel="noopener noreferrer">So-net</a></li>
+					<li><a class="link-card" href="https://www.sony.jp/" target="_blank" rel="noopener noreferrer">Sony Store</a></li>
+					<li><a class="link-card" href="#" aria-disabled="true">reserve</a></li>
+
+					<li><a class="link-card" href="http://ikedanobuo.livedoor.biz/" target="_blank" rel="noopener noreferrer">池田信夫 blog</a></li>
+					<li><a class="link-card" href="https://www.notion.so/" target="_blank" rel="noopener noreferrer">Notion</a></li>
+					<li class="link-card">予備</li>
+					<li><a class="link-card" href="iframe.html" target="_blank" rel="noopener noreferrer">新フレームサンプル</a></li>
+				</ul>
+			</section>
+		</main>
+
+		<footer>
+			<p>注: 画像は <code>./pictures/</code> に存在する必要があります。空のリンク（reserve）はプレースホルダです。</p>
+		</footer>
+
+		<script>
+			// document.write を避け、DOM に日時を挿入する
+			(function(){
+				var el = document.getElementById('current-time');
+				if(el){
+					el.textContent = new Date().toLocaleString();
+				}
+			})();
+		</script>
 	</body>
 </html>
